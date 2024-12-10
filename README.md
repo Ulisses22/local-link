@@ -32,8 +32,8 @@ npm install
 npm start
 ```
 
-
-1. Clone the repository:
-   ```bash
-   git clone 
+## Clone the repository:
+```bash
+git clone https://github.com/Ulisses22/local-link.git
+```
 

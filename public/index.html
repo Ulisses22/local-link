@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sender</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50 flex flex-col items-center justify-center h-screen p-3">
+
+    <!-- Título -->
+    <!-- <h2 class="text-3xl font-semibold text-indigo-600 animate-fade-in mb-2">Shared4U</h2> -->
+
+    <!-- Connection Form -->
+    <div id="connectionForm" class="w-full max-w-md sm:max-w-lg bg-white rounded-lg shadow-lg p-6 space-y-0 mx-auto">
+        <label for="accessCode" class="text-lg font-medium text-gray-700">Access Code</label>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 w-full">
+            <input type="password" id="accessCode"
+                class="flex-grow px-4 py-2 mb-4 sm:mb-0 sm:w-2/3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter the access code" />
+            <button id="connectButton"
+                class="bg-indigo-600 text-white px-6 py-2 rounded-lg sm:w-auto hover:scale-105 transition-all w-full sm:w-auto mt-2 sm:mt-0">
+                Connect
+            </button>
+        </div>
+        <p id="errorMessage" class="text-red-500 text-sm mt-2 text-center"></p>
+    </div>
+
+    <!-- File Upload Area (Drag and Drop) -->
+    <div id="fileArea" class="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-4 mt-0 fade-in hidden">
+        <label for="fileInput" class="text-lg font-medium text-gray-700">Choose or Drag File</label>
+        <!-- Drag and Drop Area -->
+        <div id="dropArea"
+            class="border-2 border-dashed border-gray-400 p-6 text-center text-gray-500 rounded-lg cursor-pointer">
+            <p>Drag your file here or click to select</p>
+            <input type="file" id="fileInput" class="hidden" />
+        </div>
+        <!-- Progress Bar -->
+        <div id="progressContainer" class="w-full bg-gray-200 rounded-full h-2 mt-4 hidden">
+            <div id="progressBar" class="bg-indigo-600 h-2 rounded-full" style="width: 0;"></div>
+        </div>
+        <p id="message" class="text-green-500 text-sm mt-2 text-center"></p>
+        <p id="errorMessageFile" class="text-red-500 text-sm mt-2 text-center"></p>
+
+        <!-- Manual Send Button -->
+        <div id="sendFileButtonContainer" class="text-center mt-4">
+            <button id="sendFileButton"
+                class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:scale-105 transition-all hidden">
+                Send File
+            </button>
+        </div>
+    </div>
+
+    <!-- Sent Files Display Area -->
+    <div id="sentFilesArea" class="w-full max-w-md mt-8 bg-white p-4 space-y-4 fade-in hidden">
+        <h3 class="text-xl font-medium text-indigo-600">Uploaded Files</h3>
+        <ul id="sentFilesList" class="mt-4 space-y-2">
+            <!-- The uploaded files will be listed here -->
+        </ul>
+    </div>
+
+    <!-- Connected Devices List -->
+    <div id="clientList" class="w-full max-w-md mt-0 fade-in hidden">
+        <!-- Connected Devices -->
+        <ul id="connectedClients" class="mt-4 space-y-4">
+            <!-- The list of devices will be filled dynamically -->
+        </ul>
+        <hr class="mt-5">
+
+        <!-- QR Code Scan Notice -->
+        <div
+            class="mt-4 p-4 bg-blue-100 border border-blue-300 rounded-md text-blue-700 flex items-center justify-between">
+            <!-- Text -->
+            <p class="text-sm font-medium w-2/3">
+                Scan the QR Code below or use the link to share this page: <a id="share-link"
+                    class="text-blue-500 underline" target="_blank" href="#" onclick="copyToClipboard(event)">Copy
+                    Link</a>
+            </p>
+            <!-- QR Code -->
+            <img width="50" height="50" id="qr-code" class="ml-4">
+        </div>
+    </div>
+
+    <!-- Information Panel Button -->
+    <button id="openInfoPanel"
+        class="fixed bottom-4 right-4 bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700">
+        <span class="text-xl">i</span> <!-- Info Icon -->
+    </button>
+
+    <!-- Information Panel (fullscreen) -->
+    <div id="infoPanel" class="fixed inset-0 bg-white shadow-lg z-50 hidden flex justify-center items-center">
+        <div class="p-8 max-w-lg w-full overflow-y-auto">
+            <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Information</h3>
+            <p class="text-gray-700">This site allows for simple and fast file transfer between connected devices.</p>
+            <p class="text-gray-700 mt-4">You can drag and drop files or select files directly to send them.</p>
+        </div>
+
+        <!-- Close Button (X) -->
+        <button id="closeInfoPanel"
+            class="fixed bottom-4 right-4 text-gray-500 text-3xl bg-white rounded-full p-2 hover:text-indigo-600">
+            &times;
+        </button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>

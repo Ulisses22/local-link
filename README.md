@@ -16,7 +16,7 @@ More features coming soon.
 
 ## 🎨 **Visuals**
 
-![SocketSender Screenshot](LINK HERE)
+![SocketSender Screenshot](https://github.com/Ulisses22/local-link/blob/c1e09b51c29c1bcf404761d53cd167f8460ce373/Screenshot.png)
 
 > *"A simple, secure, and fast way to transfer files."*
 
